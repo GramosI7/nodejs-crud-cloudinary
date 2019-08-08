@@ -14,5 +14,13 @@
       excepturi mollitia voluptatibus aliquid exercitationem nobis nulla et
       pariatur omnis, illum ea.
     </p>
+
+    <% sports.map(sport => {%>
+    <li><%= sport.title %></li>
+    <a href="/sport/modify/<%= sport.id %>"><button>Modify</button></a>
+    <form method="post" action="/sport/delete/<%= sport.id %>">
+      <button type="submit">X</button>
+    </form>
+    <%})%>
   </body>
 </html>
