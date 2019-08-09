@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>La route de tous les sports</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
-      laborum consequatur quis quos doloremque aut id accusantium ipsa,
-      excepturi mollitia voluptatibus aliquid exercitationem nobis nulla et
-      pariatur omnis, illum ea.
-    </p>
+<h1>La route de tous les sports</h1>
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
+  laborum consequatur quis quos doloremque aut id accusantium ipsa, excepturi
+  mollitia voluptatibus aliquid exercitationem nobis nulla et pariatur omnis,
+  illum ea.
+</p>
 
-    <% sports.map(sport => {%>
-    <li><%= sport.title %></li>
-    <a href="/sport/modify/<%= sport.id %>"><button>Modify</button></a>
-    <form method="post" action="/sport/delete/<%= sport.id %>">
-      <button type="submit">X</button>
-    </form>
-    <%})%>
-  </body>
-</html>
+<% sports.map(sport => {%>
+<div>
+  <span><%= sport.title %></span>
+  <a href="/sport/modify/<%= sport.id %>"><button>Modify</button></a>
+  <form>
+    <button onclick="deleteBtn('<%= sport.id %>')" type="submit">X</button>
+  </form>
+</div>
+<%})%>
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  function deleteBtn(id) {
+    axios.delete(`/sport/delete/${id}`)
+      .then(response => console.log(response))
+      .catch(err => console.log(err))
+  }
+</script>
