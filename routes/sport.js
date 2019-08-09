@@ -47,6 +47,7 @@ router
   .post("/post", upload.single("image"), (req, res) => {
     // post pour envoyer les données a mongodb
     cloudinary.uploader.upload(req.file.path, result => {
+      console.log(result);
       req.body.image = result.secure_url;
       const sport = new sportSchema(req.body);
       sport
@@ -84,7 +85,17 @@ router.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
   sportSchema
     .findByIdAndDelete(id)
-    .then(result => res.redirect("/sport/"))
+    .then(result => {
+      const img = result.image.substring(
+        result.image.lastIndexOf("/") + 1,
+        result.image.lastIndexOf(".")
+      );
+      console.log(img);
+      cloudinary.uploader.destroy(img, imageDelete => {
+        res.redirect("/sport/");
+        console.log(result);
+      });
+    })
     .catch(err => console.log(err));
 });
 

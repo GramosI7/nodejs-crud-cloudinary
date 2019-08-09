@@ -1,9 +1,15 @@
 <div class="container">
-  <h1><%= result.title %></h1>
-  <img src="<%= result.image %>" alt="image" />
-  <p>
-    <%= result.description %>
-  </p>
+  <div>
+    <h1><%= result.title %></h1>
+    <img src="<%= result.image %>" alt="image" />
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores officiis
+      rerum itaque optio culpa non consequuntur aspernatur ullam asperiores
+      possimus sed, eaque voluptatum, reprehenderit nisi modi, inventore et
+      corporis iste!
+    </p>
+  </div>
+
   <a href="/sport/modify/<%= result.id %>"><button>Modify</button></a>
   <form method="POST" action="/sport/delete/<%= result.id %>?_method=DELETE">
     <button type="submit">Delete resource</button>

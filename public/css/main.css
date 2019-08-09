@@ -12,6 +12,10 @@ body {
   text-align: center;
 }
 
+p {
+  word-break: break-all;
+}
+
 nav {
   background-color: crimson;
   height: 10vh;
@@ -48,6 +52,7 @@ nav {
 
 .container {
   max-width: 80%;
+  width: 80%;
   margin: auto;
   height: 90vh;
 }
