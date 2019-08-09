@@ -39,50 +39,61 @@ router.get("/", (req, res) => {
     .catch(err => console.log(err));
 });
 
-// get formulaire
-router.get("/post", (req, res) => {
-  res.render("postSport");
-});
+router
+  .get("/post", (req, res) => {
+    // rendre la page ejs qui contient le formulaire d'ajout de sport
+    res.render("postSport");
+  })
+  .post("/post", upload.single("image"), (req, res) => {
+    // post pour envoyer les données a mongodb
+    cloudinary.uploader.upload(req.file.path, result => {
+      req.body.image = result.secure_url;
+      const sport = new sportSchema(req.body);
+      sport
+        .save()
+        .then(result => {
+          console.log(result);
+          res.redirect("/sport");
+        })
+        .catch(err => console.log(err));
+    });
+  });
 
-// post sport
-router.post("/post", upload.single("image"), (req, res) => {
-  cloudinary.uploader.upload(req.file.path, result => {
-    req.body.image = result.secure_url;
-    const sport = new sportSchema(req.body);
-    sport
-      .save()
-      .then(result => {
-        console.log(result);
-        res.redirect("/sport");
-      })
+// get formulaire
+router
+  .get("/modify/:id", (req, res) => {
+    // rendre la page ejs qui contient le formulaire de modification d'un sport
+    sportSchema
+      .findById(req.params.id)
+      .then(result =>
+        res.render("modifySport", { idVariable: req.params.id, result })
+      )
+      .catch(err => console.log(err));
+  })
+  .put("/modify/:id", (req, res) => {
+    // post pour modifier les données a mongodb
+    // modify
+    sportSchema
+      .findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true })
+      .then(result => res.redirect("/sport"))
       .catch(err => console.log(err));
   });
-});
 
-// get formulaire
-router.get("/modify/:id", (req, res) => {
-  const id = req.params.id;
-  sportSchema
-    .findById(id)
-    .then(result => res.render("modifySport", { idVariable: id, result }))
-    .catch(err => console.log(err));
-});
-
-// modify
-router.post("/modify/:id", (req, res) => {
-  const id = req.params.id;
-  sportSchema
-    .findByIdAndUpdate({ _id: id }, req.body, { new: true })
-    .then(result => res.redirect("/sport"))
-    .catch(err => console.log(err));
-});
-
-// delete sport
+// delete un sport
 router.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
   sportSchema
     .findByIdAndDelete(id)
     .then(result => res.redirect("back"))
+    .catch(err => console.log(err));
+});
+
+router.get("/:id", (req, res) => {
+  sportSchema
+    .findById(req.params.id)
+    .then(result => {
+      res.render("sport", { result });
+    })
     .catch(err => console.log(err));
 });
 

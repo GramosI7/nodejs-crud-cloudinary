@@ -9,19 +9,10 @@
 <% sports.map(sport => {%>
 <div>
   <span><%= sport.title %></span>
+  <a href="/sport/<%= sport.id %>"><button>View</button></a>
   <a href="/sport/modify/<%= sport.id %>"><button>Modify</button></a>
-  <form>
-    <button onclick="deleteBtn('<%= sport.id %>')" type="submit">X</button>
-  </form>
+  <form method="POST" action="/sport/delete/<%= sport.id %>?_method=DELETE">
+  <button type="submit">Delete resource</button>
+</form>
 </div>
 <%})%>
-
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-  function deleteBtn(id) {
-    axios.delete(`/sport/delete/${id}`)
-      .then(response => console.log(response))
-      .catch(err => console.log(err))
-  }
-</script>

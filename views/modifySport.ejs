@@ -1,6 +1,8 @@
-<form action="/sport/modify/<%= result.id %>" method="POST">
+<form action="/sport/modify/<%= result.id %>?_method=PUT" method="POST">
   <label for="">Titre du sport</label>
   <input id="title" value="<%= result.title %>" name="title" type="text" />
+  <label for="">Image du sport</label>
+  <input type="text" name="image" value="<%= result.image %>">
   <label for="">Description du sport</label>
   <textarea id="description" rows="5" cols="80" name="description" type="text"><%= result.description %></textarea>
   <button id="modifySubmit">Send</button>
