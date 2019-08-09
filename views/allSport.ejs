@@ -1,3 +1,4 @@
+<div class="container">
 <h1>La route de tous les sports</h1>
 <p>
   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
@@ -7,12 +8,9 @@
 </p>
 
 <% sports.map(sport => {%>
-<div>
-  <span><%= sport.title %></span>
-  <a href="/sport/<%= sport.id %>"><button>View</button></a>
-  <a href="/sport/modify/<%= sport.id %>"><button>Modify</button></a>
-  <form method="POST" action="/sport/delete/<%= sport.id %>?_method=DELETE">
-  <button type="submit">Delete resource</button>
-</form>
-</div>
+  <div class="list-sports" >
+    <h3><%= sport.title %></h3>
+    <a href="/sport/<%= sport.id %>"><button>View</button></a>
+  </div>
 <%})%>
+</div>

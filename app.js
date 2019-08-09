@@ -5,19 +5,17 @@ const expressLayouts = require("express-ejs-layouts");
 const methodOverride = require("method-override");
 require("dotenv").config();
 
-// ligne pour définir ejs
-app.use(expressLayouts);
-app.set("view engine", "ejs");
-
-// ligne route
 app.get("/", (req, res) => {
   res.render("welcome");
 });
 
+app.use(expressLayouts);
+app.set("view engine", "ejs");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 app.use(methodOverride("_method"));
+app.use(express.static(__dirname + "/public"));
 
 app.use("/sport", require("./routes/sport"));
 
@@ -28,5 +26,3 @@ mongoose
   .catch(err => console.log(err));
 
 app.listen(4000, console.log("Le serveur tourne !"));
-
-// localhost:4000/modify

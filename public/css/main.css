@@ -1,0 +1,110 @@
+* {
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.center {
+  text-align: center;
+}
+
+nav {
+  background-color: crimson;
+  height: 10vh;
+  display: flex;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.nav-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+}
+
+.nav-links {
+  flex: 1;
+  max-width: 80%;
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.nav-links li {
+  margin: 0 2rem;
+}
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
+  height: 90vh;
+}
+
+button {
+  background-color: #34ace0;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 10px 10px -5px gray;
+  margin: 0.8rem 0;
+  border-radius: 30px;
+}
+
+.list-sports {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+img {
+  width: auto;
+  max-width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: #227093;
+  padding: 2rem;
+  border-radius: 30px;
+  width: 50%;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form label {
+  font-size: 1.4rem;
+}
+
+.form .input {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0.3rem;
+  background-color: #227093;
+  outline: none;
+  color: white;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.inputFile {
+  margin: 1rem 0;
+}

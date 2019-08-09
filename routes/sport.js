@@ -84,7 +84,7 @@ router.delete("/delete/:id", (req, res) => {
   const id = req.params.id;
   sportSchema
     .findByIdAndDelete(id)
-    .then(result => res.redirect("back"))
+    .then(result => res.redirect("/sport/"))
     .catch(err => console.log(err));
 });
 

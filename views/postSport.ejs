@@ -1,9 +1,12 @@
-<form action="/sport/post" method="POST" enctype="multipart/form-data">
-  <label for="">Titre du sport</label>
-  <input name="title" type="text" />
-   <label for="">Image du sport</label>
-  <input name="image" type="file" />
-  <label for="">Description du sport</label>
-  <textarea name="description" type="text"></textarea>
-  <button type="submit">Send</button>
-</form>
+<div class="container">
+  <h1 class="center">Ajouter sport</h1>
+  <form class="form" action="/sport/post" method="POST" enctype="multipart/form-data">
+    <label for="">Titre du sport</label>
+    <input class="input" name="title" type="text" />
+    <label for="">Image du sport</label>
+    <input class="inputFile" name="image" type="file" />
+    <label for="">Description du sport</label>
+    <textarea class="input" name="description" type="text"></textarea>
+    <button type="submit">Send</button>
+  </form>
+</div>
