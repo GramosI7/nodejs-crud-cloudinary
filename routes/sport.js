@@ -44,20 +44,25 @@ router
     // rendre la page ejs qui contient le formulaire d'ajout de sport
     res.render("postSport");
   })
-  .post("/post", upload.single("image"), (req, res) => {
-    // post pour envoyer les données a mongodb
-    cloudinary.uploader.upload(req.file.path, result => {
-      console.log(result);
-      req.body.image = result.secure_url;
-      const sport = new sportSchema(req.body);
-      sport
-        .save()
-        .then(result => {
-          console.log(result);
-          res.redirect("/sport");
-        })
-        .catch(err => console.log(err));
-    });
+  .post("/post", upload.single("image"), async (req, res) => {
+    // post pour envoyer les données a mongodb & cloudinary
+    if (req.file) {
+      try {
+        var resultImage = await cloudinary.v2.uploader.upload(req.file.path);
+        req.body.image = resultImage.secure_url;
+        req.body.imageId = resultImage.public_id;
+      } catch (err) {
+        req.flash("error", err.message);
+        return res.redirect("back");
+      }
+    }
+    new sportSchema(req.body)
+      .save()
+      .then(result => {
+        req.flash("success", "You save an project");
+        res.redirect("/sport");
+      })
+      .catch(err => console.log(err));
   });
 
 // get formulaire
@@ -71,12 +76,31 @@ router
       )
       .catch(err => console.log(err));
   })
-  .put("/modify/:id", (req, res) => {
+  .put("/modify/:id", upload.single("image"), (req, res) => {
     // post pour modifier les données a mongodb
-    // modify
     sportSchema
-      .findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true })
-      .then(result => res.redirect("/sport"))
+      .findById(req.params.id)
+      .then(async result => {
+        console.log(req.body);
+        if (req.file) {
+          try {
+            await cloudinary.v2.uploader.destroy(result.imageId);
+            var resultImage = await cloudinary.v2.uploader.upload(
+              req.file.path
+            );
+            req.body.image = resultImage.secure_url;
+            req.body.imageId = resultImage.public_id;
+          } catch (err) {
+            req.flash("error", err.message);
+            return res.redirect("back");
+          }
+        }
+        result.title = req.body.title;
+        result.description = req.body.description;
+        result.save();
+        req.flash("success", "You update an project");
+        res.redirect("/sport");
+      })
       .catch(err => console.log(err));
   });
 
@@ -90,10 +114,9 @@ router.delete("/delete/:id", (req, res) => {
         result.image.lastIndexOf("/") + 1,
         result.image.lastIndexOf(".")
       );
-      console.log(img);
       cloudinary.uploader.destroy(img, imageDelete => {
+        req.flash("success", "You delete an project");
         res.redirect("/sport/");
-        console.log(result);
       });
     })
     .catch(err => console.log(err));

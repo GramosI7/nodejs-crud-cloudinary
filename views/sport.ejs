@@ -1,12 +1,11 @@
 <div class="container">
+  <% include ./partials/messages %>
+
   <div>
     <h1><%= result.title %></h1>
     <img src="<%= result.image %>" alt="image" />
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores officiis
-      rerum itaque optio culpa non consequuntur aspernatur ullam asperiores
-      possimus sed, eaque voluptatum, reprehenderit nisi modi, inventore et
-      corporis iste!
+      <%= result.description %>
     </p>
   </div>
 

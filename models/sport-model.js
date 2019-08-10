@@ -12,7 +12,9 @@ const schemaSport = new Schema({
   },
   image: {
     type: String
-    // required: true
+  },
+  imageId: {
+    type: String
   }
 });
 
