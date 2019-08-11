@@ -6,6 +6,7 @@
     class="form"
     action="/sport/modify/<%= result.id %>?_method=PUT"
     method="POST"
+    enctype="multipart/form-data"
   >
     <label for="">Titre du sport</label>
     <input
@@ -50,8 +51,8 @@
       image.style.display = "block";
       image.setAttribute("src", URL.createObjectURL(event.target.files[0]));
     } else {
-      console.log("ok");
-      image.style.display = "none";
+      // console.log("ok");
+      // image.style.display = "none";
       image.setAttribute("src", "");
     }
   }
