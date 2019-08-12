@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/main.css" />
-  </head>
-  <body>
-    <nav>
-      <div class="nav-title">EJS-Image</div>
-      <ul class="nav-links">
-        <li><a href="/sport">All Sport</a></li>
-        <li><a href="/sport/post">Add Sport</a></li>
-      </ul>
-    </nav>
-    <%- body %>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <link rel="stylesheet" href="/css/main.css" />
+    </head>
+    <body>
+        <nav>
+            <div class="nav-container">
+                <div class="nav-title"><a href="/">CRUD</a></div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/sport">Sport</a></li>
+                    <li><a href="/sport/post">Add</a></li>
+                </ul>
+            </div>
+        </nav>
+        <%- body %>
+        <script src="/js/index.js"></script>
+    </body>
 </html>

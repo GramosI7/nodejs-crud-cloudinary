@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     }
 });
 
-var fileFilter = function(req, file, cb) {
+const fileFilter = function(req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
         return cb(new Error("Only image files are allowed!"), false);
@@ -22,7 +22,7 @@ const upload = multer({
     fileFilter
 });
 
-var cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary");
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -38,6 +38,7 @@ router.get("/", (req, res) => {
         })
         .catch(err => console.log(err));
 });
+
 // GET POST
 router
     .get("/post", (req, res) => {
@@ -45,29 +46,51 @@ router
     })
     .post("/post", upload.single("image"), async (req, res) => {
         // POST
-        if (req.file) {
-            try {
-                var resultImage = await cloudinary.v2.uploader.upload(
-                    req.file.path
-                );
-                req.body.image = resultImage.secure_url;
-                req.body.imageId = resultImage.public_id;
-            } catch (err) {
-                req.flash("error", err.message);
-                return res.redirect("back");
-            }
+        const errors = [];
+        const { title, description } = req.body;
+
+        if (!title || !description) {
+            errors.push({ msg: "Please fill in all fields" });
         }
-        new sportSchema(req.body)
-            .save()
-            .then(result => {
-                req.flash("success", "You save an project");
-                res.redirect("/sport");
-            })
-            .catch(err => console.log(err));
+
+        if (errors.length > 0) {
+            res.render("postSport", {
+                errors
+            });
+        } else {
+            if (req.file) {
+                try {
+                    let resultImage = await cloudinary.v2.uploader.upload(
+                        req.file.path
+                    );
+                    req.body.image = resultImage.secure_url;
+                    req.body.imageId = resultImage.public_id;
+                } catch (err) {
+                    req.flash("error", err.message);
+                    return res.redirect("back");
+                }
+            }
+            new sportSchema(req.body)
+                .save()
+                .then(result => {
+                    req.flash("success", "You save an project");
+                    res.redirect("/sport");
+                })
+                .catch(err => console.log(err));
+        }
     });
 
+router.get("/:id", (req, res) => {
+    sportSchema
+        .findById(req.params.id)
+        .then(result => {
+            res.render("sport", { result });
+        })
+        .catch(err => console.log(err));
+});
+
 router
-    .get("/modify/:id", (req, res) => {
+    .get("/:id/modify", (req, res) => {
         // GET MODIFY
         sportSchema
             .findById(req.params.id)
@@ -76,7 +99,7 @@ router
             )
             .catch(err => console.log(err));
     })
-    .put("/modify/:id", upload.single("image"), (req, res) => {
+    .put("/:id/modify", upload.single("image"), (req, res) => {
         // PUT MODIFY
         sportSchema.findById(req.params.id, async (err, sport) => {
             if (err) {
@@ -95,17 +118,17 @@ router
                     req.flash("error", err.message);
                     return res.redirect("back");
                 }
-                sport.title = req.body.title;
-                sport.description = req.body.description;
-                sport.save();
-                req.flash("success", "You update this sport");
-                res.redirect(`/sport/${sport.id}`);
             }
+            sport.title = req.body.title;
+            sport.description = req.body.description;
+            sport.save();
+            req.flash("success", "You update this sport");
+            res.redirect(`/sport/${sport.id}`);
         });
     });
 
 // DELETE
-router.delete("/delete/:id", (req, res) => {
+router.delete("/:id/delete/", (req, res) => {
     const id = req.params.id;
     sportSchema
         .findByIdAndDelete(id)
@@ -114,15 +137,6 @@ router.delete("/delete/:id", (req, res) => {
                 req.flash("success", "You delete a sport");
                 res.redirect("/sport/");
             });
-        })
-        .catch(err => console.log(err));
-});
-
-router.get("/:id", (req, res) => {
-    sportSchema
-        .findById(req.params.id)
-        .then(result => {
-            res.render("sport", { result });
         })
         .catch(err => console.log(err));
 });

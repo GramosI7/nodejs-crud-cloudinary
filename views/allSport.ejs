@@ -1,17 +1,12 @@
 <div class="container">
- <% include ./partials/messages %>
-<h1>La route de tous les sports</h1>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
-  laborum consequatur quis quos doloremque aut id accusantium ipsa, excepturi
-  mollitia voluptatibus aliquid exercitationem nobis nulla et pariatur omnis,
-  illum ea.
-</p>
+    <% include ./partials/messages %>
+    <h1>La route de tous les sports</h1>
 
-<% sports.map(sport => {%>
-  <div class="list-sports" >
-    <h3><%= sport.title %></h3>
-    <a href="/sport/<%= sport.id %>"><button>View</button></a>
-  </div>
-<%})%>
+    <% sports.map(sport => {%>
+    <div class="list-sports">
+        <h2 style="margin-bottom: 2%"><%= sport.title %></h2>
+        <p style="margin-bottom: 0"><%= sport.description %></p>
+        <a href="/sport/<%= sport.id %>"><button>View</button></a>
+    </div>
+    <%})%>
 </div>

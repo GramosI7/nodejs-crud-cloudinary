@@ -42,4 +42,9 @@ app.get("/", (req, res) => {
 
 app.use("/sport", require("./routes/sport"));
 
-app.listen(4000, console.log("Le serveur tourne !"));
+app.listen(4000, () => {
+    console.log("Le serveur tourne !");
+    if (process.send) {
+        process.send("online");
+    }
+});

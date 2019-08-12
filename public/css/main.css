@@ -2,114 +2,155 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #fbfcff;
 }
 
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 p {
-  word-break: break-all;
+    word-break: break-all;
 }
 
 nav {
-  background-color: crimson;
-  height: 10vh;
-  display: flex;
-  color: white;
-  font-size: 1.2rem;
+    height: 10vh;
+    color: rgb(24, 21, 21);
+    font-size: 1.2rem;
+    background-color: #ffffff;
+}
+
+.nav-container {
+    display: flex;
+    max-width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .nav-title {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.7rem;
+    flex: 1;
+    font-size: 2rem;
+}
+
+.nav-title a {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(24, 21, 21);
 }
 
 .nav-links {
-  flex: 1;
-  max-width: 80%;
-  margin: 0 auto;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+    flex: 1;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .nav-links li {
-  margin: 0 2rem;
+    margin: 0 1.3rem;
 }
 .nav-links li a {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: rgb(24, 21, 21);
 }
 
 .container {
-  max-width: 80%;
-  width: 80%;
-  margin: auto;
-  height: 90vh;
+    max-width: 80%;
+    width: 80%;
+    margin: auto;
+    height: 90vh;
 }
 
 button {
-  background-color: #34ace0;
-  color: white;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 10px 10px -5px gray;
-  margin: 0.8rem 0;
-  border-radius: 30px;
+    background-color: #00d061;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    margin: 0.8rem 0;
+    border-radius: 5px;
+}
+
+button:focus {
+    outline: none;
 }
 
 .list-sports {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+    margin: 5% 0;
 }
 
 img {
-  width: auto;
-  max-width: 100%;
+    width: auto;
+    max-width: 100%;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  background-color: #227093;
-  padding: 2rem;
-  border-radius: 30px;
-  width: 50%;
-  margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    color: #cccccc;
+    background-color: #24282f;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 50%;
+    margin: 0 auto;
 }
 
 .form label {
-  font-size: 1.4rem;
+    font-size: 1.4rem;
 }
 
 .form .input {
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 0.3rem;
-  background-color: #227093;
-  outline: none;
-  color: white;
-  font-size: 1.1rem;
-  margin: 1rem 0;
+    border: none;
+    border-radius: 5px;
+    padding: 0.3rem;
+    background-color: #1c1f25;
+    outline: none;
+    color: white;
+    font-size: 1.1rem;
+    margin: 0.3rem 0 1rem;
 }
 
 .inputFile {
-  margin: 1rem 0;
+    margin: 0.3rem 0 1rem;
 }
 
 .form img {
-  margin: 0.8rem 0;
+    margin: 0.8rem 0;
+    object-fit: cover;
+    width: 100%;
+}
+
+.deleteBtn {
+    background-color: red;
+}
+
+.msg {
+    border-radius: 5px;
+    padding: 5px 20px;
+    color: #fbfcff;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.msg button {
+    margin-left: auto;
+    font-size: 1.7rem;
+    padding: 0;
+    background-color: inherit;
+}
+
+.success-msg {
+    background-color: rgba(3, 197, 93, 0.8);
+}
+
+.error-msg {
+    background-color: rgba(197, 3, 3, 0.8);
 }

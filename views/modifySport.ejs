@@ -1,59 +1,45 @@
 <div class="container">
-  <% include ./partials/messages %>
-
-  <h1 class="center">Modifier sport</h1>
-  <form
-    class="form"
-    action="/sport/modify/<%= result.id %>?_method=PUT"
-    method="POST"
-    enctype="multipart/form-data"
-  >
-    <label for="">Titre du sport</label>
-    <input
-      class="input"
-      id="title"
-      value="<%= result.title %>"
-      name="title"
-      type="text"
-    />
-    <label for="file">Modify Image</label>
-    <input
-      class="inputFile"
-      type="file"
-      name="image"
-      onchange="loadFile(event)"
-    />
-    <img
-      src="<%= result.image %>"
-      id="output"
-      width="50"
-      style="display: block"
-    />
-
-    <label for="">Description du sport</label>
-    <textarea
-      class="input"
-      id="description"
-      rows="5"
-      cols="80"
-      name="description"
-      type="text"
+    <% include ./partials/messages %>
+    <h1 class="center">Modifier sport</h1>
+    <form
+        class="form"
+        action="/sport/<%= result.id %>/modify/?_method=PUT"
+        method="POST"
+        enctype="multipart/form-data"
     >
+        <label for="">Titre du sport</label>
+        <input
+            class="input"
+            id="title"
+            value="<%= result.title %>"
+            name="title"
+            type="text"
+        />
+        <label for="file">Modify Image</label>
+        <input
+            class="inputFile"
+            type="file"
+            name="image"
+            onchange="loadFile(event)"
+        />
+        <img
+            src="<%= result.image %>"
+            id="output"
+            width="50"
+            style="display: block"
+        />
+
+        <label for="">Description du sport</label>
+        <textarea
+            class="input"
+            id="description"
+            rows="5"
+            cols="80"
+            name="description"
+            type="text"
+        >
 <%= result.description %></textarea
-    >
-    <button id="modifySubmit">Send</button>
-  </form>
+        >
+        <button id="modifySubmit">Send</button>
+    </form>
 </div>
-<script>
-  function loadFile(event) {
-    var image = document.querySelector("#output");
-    if (event.target.files.length >= 1) {
-      image.style.display = "block";
-      image.setAttribute("src", URL.createObjectURL(event.target.files[0]));
-    } else {
-      // console.log("ok");
-      // image.style.display = "none";
-      image.setAttribute("src", "");
-    }
-  }
-</script>
