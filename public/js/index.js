@@ -9,7 +9,7 @@ function loadFile(event) {
         image.setAttribute("src", "");
     }
 }
-const successBtn = document.querySelector(".msg button");
+const successBtn = document.querySelector(".msg span");
 successBtn.addEventListener("click", () => {
     document.querySelector(".msg").style.display = "none";
 });
